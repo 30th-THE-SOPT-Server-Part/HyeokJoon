@@ -54,8 +54,18 @@ const findMovie = async (movieId: string): Promise<MovieResponseDto | null> => {
     }
 };
 
+const deleteMovie = async (movieId: string): Promise<void> => {
+    try {
+        await Movie.findByIdAndDelete(movieId);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
 export default {
     createMovie,
     updateMovie,
     findMovie,
+    deleteMovie,
 };
