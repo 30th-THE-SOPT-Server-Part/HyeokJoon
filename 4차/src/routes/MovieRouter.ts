@@ -16,5 +16,6 @@ router.post(
     MovieController.createMovie
 );
 router.put("/:movieId", MovieController.updateMovie);
+router.get("/:movieId", MovieController.findMovie);
 
 export default router;
