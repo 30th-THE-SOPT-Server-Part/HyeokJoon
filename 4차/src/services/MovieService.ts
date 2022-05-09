@@ -1,5 +1,6 @@
 import { PostBaseResponseDto } from "../interfaces/common/PostBaseResponseDto";
 import { MovieCreateDto } from "../interfaces/movie/MovieCreateDto";
+import { MovieUpdateDto } from "../interfaces/movie/MovieUpdateDto";
 import Movie from "../models/Movie";
 
 const createMovie = async (
@@ -27,6 +28,17 @@ const createMovie = async (
     }
 };
 
+const updateMovie = async (movieId: string, movieUpdateDto: MovieUpdateDto) => {
+    try {
+        // findByIdAndUpdate
+        await Movie.findByIdAndUpdate(movieId, movieUpdateDto);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
 export default {
     createMovie,
+    updateMovie,
 };
