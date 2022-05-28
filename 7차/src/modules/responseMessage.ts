@@ -26,6 +26,7 @@ const message = {
     DELETE_MOVIE_SUCCESS: "영화 삭제 성공",
     UPDATE_MOVIE_SUCCESS: "영화 삭제 성공",
     CREATE_MOVIE_COMMENT_SUCCESS: "영화 댓글 생성 성공",
+    SEARCH_MOVIE_SUCCESS: "영화 검색 성공",
 
     // 파일
     CREATE_FILE_SUCCESS: "파일 업로드 성공",

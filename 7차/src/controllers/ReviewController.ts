@@ -4,6 +4,7 @@ import message from "../modules/responseMessage";
 import util from "../modules/util";
 import { ReviewCreateDto } from "../interfaces/review/ReviewCreateDto";
 import ReviewService from "../services/ReviewService";
+import { ReviewOptionType } from "../interfaces/review/ReviewOptionType";
 const { validationResult } = require("express-validator");
 
 /**
@@ -43,15 +44,28 @@ const createReview = async (req: Request, res: Response) => {
 };
 
 /**
- *  @route GET /review/movies/:movieId
+ *  @route GET /review/movies/:movieId?search=&option=&page=
  *  @desc Get Review
  *  @access Public
  */
 const getReviews = async (req: Request, res: Response) => {
     const { movieId } = req.params;
 
+    const { search, option } = req.query;
+
+    const isOptionType = (option: string): option is ReviewOptionType => {
+        return ["title", "content", "title_content"].indexOf(option) !== -1;
+    };
+
+    const page: number = Number(req.query.page || 1);
+
     try {
-        const data = await ReviewService.getReviews(movieId);
+        const data = await ReviewService.getReviews(
+            movieId,
+            search as string,
+            option as ReviewOptionType,
+            page
+        );
 
         res.status(statusCode.OK).send(
             util.success(statusCode.OK, message.READ_REVIEW_SUCCESS, data)
